@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: vault-ui
+  labels:
+    app: vault-ui
+spec:
+  host: vault-ui.ocp-apps.${CLUSTER}.intapp.eu
+  to:
+    kind: Service
+    name: vault-ui-svc
+  port:
+    targetPort: 8000-vault-ui
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: consul-ui
+  labels:
+    app: consul-ui
+spec:
+  host: consul-ui.ocp-apps.${CLUSTER}.intapp.eu
+  to:
+    kind: Service
+    name: consul-hs
+  port:
+    targetPort: 8500-cons-api
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: consul-wan
+  labels:
+    app: consul-wan
+spec:
+  host: consul-wan.ocp-apps.${CLUSTER}.intapp.eu
+  to:
+    kind: Service
+    name: consul-hs
+  port:
+    targetPort: 8302-cons-sew-t
+---

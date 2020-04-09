@@ -1,0 +1,28 @@
+kind: ConfigMap
+metadata:
+  name: vault-template
+data:
+  vault.template.json: |-
+    {
+       "cluster_addr": "http://${VAULT_POD_IP}:8201",
+       "default_lease_ttl":"168h",
+
+       "listener":{
+           "tcp":{
+              "address":"0.0.0.0:8200",
+              "cluster_address":"0.0.0.0:8201",
+              "tls_disable":"true"
+           }
+        },
+
+       "max_lease_ttl":"720h",
+
+       "storage":{
+          "consul":{
+             "address": "consul-hs:8500",
+             "token": "${CONSUL_MASTER_TOKEN}",
+             "disable_registration": "true"
+          }
+       }
+    }
+---

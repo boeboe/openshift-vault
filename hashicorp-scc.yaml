@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: SecurityContextConstraints
+metadata:
+  annotations:
+    kubernetes.io/description: restricted denies access to all host features and requires
+      pods to be run with a UID, and SELinux context that are allocated to the namespace. This
+      is inherited from the most restrictive SCC and it is used by hashicorp vault with IPC_LOCK.
+  name: vault
+allowHostDirVolumePlugin: false
+allowHostIPC: false
+allowHostNetwork: false
+allowHostPID: false
+allowHostPorts: false
+allowPrivilegedContainer: false
+allowedCapabilities: [ "IPC_LOCK", "SETFCAP" ]
+allowedFlexVolumes: []
+defaultAddCapabilities: []
+fsGroup:
+  type: MustRunAs
+groups:
+- system:authenticated
+priority: null
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SETUID
+- SETGID
+runAsUser:
+  type: MustRunAsRange
+seLinuxContext:
+  type: MustRunAs
+supplementalGroups:
+  type: RunAsAny
+users: [ "vault-user" ]
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- persistentVolumeClaim
+- projected
+- secret

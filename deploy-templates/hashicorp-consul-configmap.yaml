@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consul-config
+data:
+  consul.json: |-
+    {
+      "acl_datacenter": "${CLUSTER}",
+      "acl_default_policy": "allow",
+      "acl_down_policy": "allow",
+      "bind_addr": "0.0.0.0",
+      "bootstrap_expect": 3,
+      "client_addr": "0.0.0.0",
+      "disable_update_check": true,
+      "datacenter": "${CLUSTER}",
+      "data_dir": "/consul/data",
+      "disable_host_node_id": true,
+      "domain": "${CONSUL_NAMESPACE}.svc.cluster.local",
+      "encrypt": "${CONSUL_ENCRYPTION_KEY}",
+
+      "ports": {
+        "dns": 8600,
+        "http": 8500,
+        "serf_lan": 8301,
+        "serf_wan": 8302,
+        "server": 8300
+      },
+
+      "retry_join": [
+        "consul-0.consul-hs.${CONSUL_NAMESPACE}.svc.cluster.local",
+        "consul-1.consul-hs.${CONSUL_NAMESPACE}.svc.cluster.local",
+        "consul-2.consul-hs.${CONSUL_NAMESPACE}.svc.cluster.local"
+       ],
+
+      "server": true,
+      "ui": true
+    }
+---

@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: consul-hs
+  labels:
+    name: consul-hs
+spec:
+  selector:
+    component: consul
+  clusterIP: None
+  ports:
+    - name: 8300-cons-serv
+      port: 8300
+      targetPort: 8300
+      protocol: TCP
+    - name: 8301-cons-sel-t
+      port: 8301
+      targetPort: 8301
+      protocol: TCP
+    - name: 8301-cons-sel-u
+      port: 8301
+      targetPort: 8301
+      protocol: UDP
+    - name: 8302-cons-sew-t
+      port: 8302
+      targetPort: 8302
+      protocol: TCP
+    - name: 8302-cons-sew-u
+      port: 8302
+      targetPort: 8302
+      protocol: UDP
+    - name: 8500-cons-api
+      port: 8500
+      targetPort: 8500
+      protocol: TCP
+    - name: 8501-cons-api-s
+      port: 8501
+      targetPort: 8501
+      protocol: TCP
+    - name: 8600-cons-dns-t
+      port: 8600
+      targetPort: 8600
+      protocol: TCP
+    - name: 8600-cons-dns-u
+      port: 8600
+      targetPort: 8600
+      protocol: UDP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-svc
+  labels:
+    name: vault-svc
+spec:
+  selector:
+    component: vault
+  ports:
+    - name: 8200-vault
+      port: 8200
+      targetPort: 8200
+      protocol: TCP
+    - name: 8201-vault-cluster
+      port: 8201
+      targetPort: 8201
+      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vault-ui-svc
+  labels:
+    name: vault-ui-svc
+spec:
+  selector:
+    component: vault-ui
+  ports:
+    - name: 8000-vault-ui
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+---

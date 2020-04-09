@@ -1,0 +1,100 @@
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-consul-to-consul
+spec:
+  podSelector:
+    matchLabels:
+      component: consul
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              component: consul
+      ports:
+        - protocol: TCP
+          port: 8300
+        - protocol: TCP
+          port: 8301
+        - protocol: UDP
+          port: 8301
+        - protocol: TCP
+          port: 8302
+        - protocol: UDP
+          port: 8302
+        - protocol: TCP
+          port: 8500
+        - protocol: TCP
+          port: 8501
+        - protocol: TCP
+          port: 8600
+        - protocol: TCP
+          port: 8600
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-router-to-consul
+spec:
+  podSelector:
+    matchLabels:
+      component: consul
+  ingress:
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - protocol: TCP
+          port: 8500
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vault-to-consul
+spec:
+  podSelector:
+    matchLabels:
+      component: consul
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              component: vault
+      ports:
+        - protocol: TCP
+          port: 8500
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vault-to-vault
+spec:
+  podSelector:
+    matchLabels:
+      component: vault
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              component: vault
+      ports:
+        - protocol: TCP
+          port: 8201
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vault-ui-to-vault
+spec:
+  podSelector:
+    matchLabels:
+      component: vault
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              component: vault-ui
+      ports:
+        - protocol: TCP
+          port: 8200
+---

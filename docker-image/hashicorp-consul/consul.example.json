@@ -1,0 +1,49 @@
+{
+    "acl_datacenter": "${ACL_DATACENTER}",
+    "acl_default_policy": "${ACL_DEFAULT_POLICY}",
+    "acl_down_policy": "${ACL_DOWN_POLICY}",
+    "acl_master_token": "${ACL_MASTER_TOKEN}",
+    "advertise_addr": "${LISTEN_ADDRESS}",
+    "advertise_addr_wan": "${LISTEN_ADDRESS}",
+    "bind_addr": "${LISTEN_ADDRESS}",
+    "bootstrap_expect": "${REPLICAS}",
+    "ca_file": "${CA_FILE}",
+    "cert_file": "${CERT_FILE}",
+    "client_addr": "${LISTEN_ADDRESS}",
+    "datacenter": "${DATACENTER}",
+    "data_dir": "${DATA_DIR}",
+    "disable_host_node_id": "${DISABLE_HOST_NODE_ID}",
+    "disable_update_check": "${DISABLE_UPDATE_CHECK}",
+    "domain": "${DOMAIN}",
+
+    "dns_config": {
+        "allow_stale": "${ALLOW_STALE}",
+        "max_stale": "${MAX_STALE}"
+    },
+
+    "enable_debug": "${ENABLE_DEBUG}",
+    "enable_syslog": "${ENABLE_SYSLOG}",
+    "encrypt": "${ENCRYPT}",
+    "key_file": "${KEY_FILE}",
+    "log_level": "${LOG_LEVEL}",
+    "node_name": "${NODE_NAME}",
+
+    "ports" : {
+        "dns": "${DNS_SERVER_PORT}",
+        "http": "${HTTP_PORT}",
+        "https": "${HTTPS_PORT}",
+        "rpc": "${CLI_RPC_PORT}",
+        "serf_lan": "${SERF_LAN_PORT}",
+        "serf_wan": "${SERF_WAN_PORT}",
+        "server": "${SERVER_RPC_PORT}"
+    },
+
+    "retry_join": ["${RETRY_JOIN}"],
+    "retry_join_wan": ["${RETRY_JOIN_WAN}"],
+    "server_name": "${ENGINE_USERNAME}",
+    "server": "${SERVER}",
+    "ui": "${UI}"
+    "verify_incoming": "${VERIFY_INCOMING}",
+    "verify_outgoing": "${VERIFY_OUTGOING}",
+    "verify_server_hostname": "${VERIFY_SERVER_HOSTNAME}"
+}

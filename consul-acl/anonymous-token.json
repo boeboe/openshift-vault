@@ -1,0 +1,6 @@
+{
+  "ID": "anonymous",
+  "Name": "Anonymous Token",
+  "Type": "client",
+  "Rules": "key \"lock/\" { policy = \"write\" }, service \"\" { policy = \"write\" }"
+}
